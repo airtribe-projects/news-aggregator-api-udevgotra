@@ -4,5 +4,4 @@ News Aggregator API
 
 2. Install required modules
 
-3. Project Description
-
+3. Project description
