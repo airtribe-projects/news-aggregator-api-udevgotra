@@ -1,17 +1,30 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+require('dotenv').config()
+const PORT = process.env.PORT
 
-app.use(express.json());
+
+const express = require('express');
+const mongoose = require('mongoose');
+const userRouter = require('./src/routers/users');
+const newsRouter = require('./src/routers/news');
+
+
+const app = express();
+
+
+app.use('/users', userRouter);
+app.use('/news', newsRouter);
+
+
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, (err) => {
-    if (err) {
-        return console.log('Something bad happened', err);
-    }
-    console.log(`Server is listening on ${port}`);
-});
 
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+        console.log("Connected to MongoDB")
+        app.listen(PORT, () => {
+            console.log(`Server is up and running!`)
+        })
+    })
 
 
 module.exports = app;
