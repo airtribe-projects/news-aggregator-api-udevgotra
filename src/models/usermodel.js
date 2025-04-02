@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 // Schema
 const usersSchema = new mongoose.Schema({
     name: {
@@ -22,30 +21,31 @@ const usersSchema = new mongoose.Schema({
     },
     preferences: {
 
-        catagory: {
-            type: Array,
-            default: ["general"]
+        query: {
+            type: String,
+            default: "latest"
+        },
+        searchIn: {
+            type: String, // TODO, need to change it to Array type
+            default: "title"
         },
         language: {
             type: String,
-            default: "en"
+            default: "gb"
         },
-        country: {
+        pageSize: {
+            type: Number,
+            default: 10
+        },
+        sortBy: {
             type: String,
-            default: "uk"
-
-
-        },
-        source: {
-            type: Array,
-            default: ["bbc-news"]
+            default: "publishedAt"
         }
     },
     lastLoggedIn: {
         type: Date,
         default: Date.now
     }
-
 });
 
 
